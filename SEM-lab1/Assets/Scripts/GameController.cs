@@ -25,10 +25,14 @@ public class GameController : MonoBehaviour
 
     }
 
-
     void OnTriggerEnter(Collider other)
     {
         score += 1;
         timer = 6.0f;
+    }
+
+    public void GoalReached()
+    {
+        // stub
     }
 }
