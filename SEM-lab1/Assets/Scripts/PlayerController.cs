@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     GameController gameController;
     GameObject goal;
+
     public float speed = 5.0f;
 
     // Start is called before the first frame update
@@ -43,5 +43,11 @@ public class PlayerController : MonoBehaviour
         {
             gameController.GoalReached();
         }
+    }
+
+    // Increment the stored stroke count when the ball is hit by the player
+    void HitBall()
+    {
+        _gameController.IncrementStrokeCount();
     }
 }
