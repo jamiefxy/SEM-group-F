@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        this._originalRotation = this.transform.rotation; //saves initial rotation for refiring so that the ball is not at a strange angle due to rolling
+        _originalRotation = transform.rotation; //saves initial rotation for refiring so that the ball is not at a strange angle due to rolling
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             _fired = false;
             Debug.Log("!!!! STOPPED MOVING !!!!!!");
-            this.transform.rotation = this._originalRotation; //resets rotation
+            transform.rotation = _originalRotation; //resets rotation
         }
 
         if (Input.GetKeyDown(KeyCode.R)) //FOR DEBUGGING -> Pressing R reloads the level
