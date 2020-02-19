@@ -6,21 +6,30 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     GameController _gameController;
+    public GameObject _outOfBoundsObject;
     public float rotateSpeed = 5.0f;
     public float powerMin = 5f;             
     public float powerMax = 500f;              
-    public float chargeTime = 5f;     
+    public float chargeTime = 5f;
+    public bool hardMode = true;
     private float _chargeTimeCurr = 0f;
     private bool _isCharging = false;       
     private bool _spaceUp = true;
     private bool _fired = false;
     private Quaternion _originalRotation;
+    private Vector3 _originalPos;
 
     // Start is called before the first frame update
     void Start()
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         _originalRotation = transform.rotation; //saves initial rotation for refiring so that the ball is not at a strange angle due to rolling
+    }
+
+    void Awake()
+    {
+        _originalPos = transform.position; //saves start inital position (ball location) for resetting
+
     }
 
     // Update is called once per frame
@@ -34,9 +43,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _spaceUp && _fired == false)
         {
+            if(!hardMode) //if hard mode is not enabled then ball will reset to previous (not initial) position when OutOfBounds is hit
+            {
+                _originalPos = transform.position;
+            }
             _chargeTimeCurr = 0f; //the longer space is pressed = more power
             _isCharging = true;
             Debug.Log("Charge time: " + _chargeTimeCurr);
+            
         }
 
         if (_isCharging && Input.GetKeyUp(KeyCode.Space) && _fired == false)
@@ -66,6 +80,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) //FOR DEBUGGING -> Pressing R reloads the level
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("Collision");
+        if (col.gameObject.tag == "OutOfBounds") //any object can have OutOfBounds tag, which will reset ball position
+        {
+            Debug.Log("Out of bounds");
+            Rigidbody r = GetComponent<Rigidbody>();
+            r.constraints = RigidbodyConstraints.FreezeAll; //stops the previous force from being applied to object when respawning
+            transform.rotation = _originalRotation; //resets rotation and position
+            transform.position = _originalPos;
+            r.constraints = RigidbodyConstraints.None; //object can now have force applied again
+            //only resetting the ball postion so other variables such as _strokeCount are maintained
         }
     }
 
