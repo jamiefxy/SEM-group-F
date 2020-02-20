@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        if(gameController == null)
+        _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        if(_gameController == null)
         {
             Debug.Log("GameController could not be found.");
         }
@@ -83,10 +83,12 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject == goal.gameObject)
         {
-            gameController.GoalReached();
+            _gameController.GoalReached();
         }
         
+        Rigidbody r = GetComponent<Rigidbody>();
         float movementSpeed = r.velocity.magnitude;
+
         if (movementSpeed < 0.05 && _fired) //checks if the ball is still moving, ie has a magnitude
         {
             _fired = false;
