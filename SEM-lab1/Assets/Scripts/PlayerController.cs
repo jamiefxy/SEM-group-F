@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    GameObject goal;
     GameController _gameController;
     public GameObject _outOfBoundsObject;
     public float rotateSpeed = 5.0f;
@@ -22,14 +23,23 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        if(gameController == null)
+        {
+            Debug.Log("GameController could not be found.");
+        }
+
+        goal = GameObject.FindWithTag("Goal");
+        if(goal == null)
+        {
+            Debug.Log("The goal for this course could not be found.");
+        }
         _originalRotation = transform.rotation; //saves initial rotation for refiring so that the ball is not at a strange angle due to rolling
     }
 
     void Awake()
     {
         _originalPos = transform.position; //saves start inital position (ball location) for resetting
-
     }
 
     // Update is called once per frame
@@ -67,8 +77,15 @@ public class PlayerController : MonoBehaviour
         {
             _chargeTimeCurr += Time.deltaTime; //increases charge over time, when space is pressed
         }
+    }
 
-        Rigidbody r = GetComponent<Rigidbody>();
+    void OnTriggerEnter(Collider collision)
+    {
+        if(collision.gameObject == goal.gameObject)
+        {
+            gameController.GoalReached();
+        }
+        
         float movementSpeed = r.velocity.magnitude;
         if (movementSpeed < 0.05 && _fired) //checks if the ball is still moving, ie has a magnitude
         {

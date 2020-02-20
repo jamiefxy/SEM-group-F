@@ -41,4 +41,9 @@ public class GameController : MonoBehaviour
         score += 1;
         timer = 6.0f;
     }
+
+    public void GoalReached()
+    {
+        // stub
+    }
 }
