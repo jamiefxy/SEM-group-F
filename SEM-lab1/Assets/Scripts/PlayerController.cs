@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     GameObject goal;
     GameController _gameController;
     public GameObject _outOfBoundsObject;
+    public GameObject _directionalIndicator;
     public float rotateSpeed = 5.0f;
     public float powerMin = 5f;             
     public float powerMax = 500f;              
@@ -77,15 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             _chargeTimeCurr += Time.deltaTime; //increases charge over time, when space is pressed
         }
-    }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        if(collision.gameObject == goal.gameObject)
-        {
-            _gameController.GoalReached();
-        }
-        
         Rigidbody r = GetComponent<Rigidbody>();
         float movementSpeed = r.velocity.magnitude;
 
@@ -99,6 +92,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) //FOR DEBUGGING -> Pressing R reloads the level
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if(collision.gameObject == goal.gameObject)
+        {
+            _gameController.GoalReached();
         }
     }
 
