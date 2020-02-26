@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     private float _prevHeight;
     private float _travel;
     private Quaternion _userRotation;
-    private bool controlling = false;
     private float _horizontalAxis = 0;
     private float _verticalAxis = 0;
 
@@ -67,15 +66,6 @@ public class PlayerController : MonoBehaviour
             //uses Quaternions and Euler angles to get absolute rotation, not local
             //makes controlling rotation easier
 
-           if(transform.rotation != _originalRotation)
-           {
-                controlling = true; //if the ball is being rotated by user, do not reset its postion
-           }
-           else
-           {
-                controlling = false;
-           }
-
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && _spaceUp && _fired == false)
@@ -87,7 +77,6 @@ public class PlayerController : MonoBehaviour
             _chargeTimeCurr = 0f; //the longer space is pressed = more power
             _isCharging = true;
             _spaceUp = false;
-            controlling = false;
             Debug.Log("Charge time: " + _chargeTimeCurr);
             
         }
@@ -98,8 +87,7 @@ public class PlayerController : MonoBehaviour
             float power = Mathf.Lerp(powerMin, powerMax, _chargeTimeCurr / chargeTime);
             //interpolates between min power, max power over the max charge time
             Debug.Log("Power: " + power);
-            controlling = false;
-
+            _directionalIndicator.GetComponent<Renderer>().enabled = false;
             _fired = true;
             HitBall(power);
         }
@@ -116,11 +104,12 @@ public class PlayerController : MonoBehaviour
 
         _travel = Mathf.Abs(_currHeight - _prevHeight); //magnitude does not detect falling so this is done manually
 
-        if(_travel == 0 && movementSpeed == 0 && controlling == false) //check the ball is not moving, can then reset
+        if(_travel == 0 && movementSpeed == 0) //check the ball is not moving, can then reset
         {
             _fired = false;
             Debug.Log("!!!! STOPPED MOVING !!!!!!");
             transform.rotation = _originalRotation; //resets rotation
+            _directionalIndicator.GetComponent<Renderer>().enabled = true;
         }
 
         _prevHeight = _currHeight;
