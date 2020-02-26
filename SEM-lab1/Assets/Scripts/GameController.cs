@@ -5,29 +5,23 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    #region private variables
     public Text Score;
-    public float score = 0.0f;
-    public float timer = 5.0f;
-    private int _strokeCount = 0;
+    float _score = 0.0f, _timer = 5.0f;
+    int _strokeCount = 0;
+    #endregion
 
-    // Start is called before the first frame update
+    #region private function
     void Start()
     {
-        Score.text = $"Score: {score}\nTimer: {timer}\nStroke: {_strokeCount}";
+        Score.text = $"Score: {_score}\nTimer: {_timer}\nStroke: {_strokeCount}";
     }
 
-    // Update is called once per frame
     void Update()
     {
         
-        timer -= Time.deltaTime;
-        Score.text = $"Score: {score}\nTimer: {(int)timer}\nStroke: {_strokeCount}";
-    }
-
-    // Increase stroke count by 1
-    public void IncrementStrokeCount()
-    {
-        _strokeCount++;
+        _timer -= Time.deltaTime;
+        Score.text = $"Score: {_score}\nTimer: {(int)_timer}\nStroke: {_strokeCount}";
     }
 
     // Reset the stroke count to 0
@@ -38,12 +32,21 @@ public class GameController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        score += 1;
-        timer = 6.0f;
+        _score += 1;
+        _timer = 6.0f;
+    }
+    #endregion
+
+    #region public functions
+    // Increase stroke count by 1
+    public void IncrementStrokeCount()
+    {
+        _strokeCount++;
     }
 
     public void GoalReached()
     {
         // stub
     }
+    #endregion
 }

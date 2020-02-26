@@ -5,23 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    GameObject goal;
+    #region private variables
+    GameObject _goal;
     GameController _gameController;
-    public GameObject _outOfBoundsObject;
-    public GameObject _directionalIndicator;
-    public float rotateSpeed = 5.0f;
-    public float powerMin = 5f;             
-    public float powerMax = 500f;              
-    public float chargeTime = 5f;
-    public bool hardMode = true;
-    private float _chargeTimeCurr = 0f;
-    private bool _isCharging = false;       
-    private bool _spaceUp = true;
-    private bool _fired = false;
-    private Quaternion _originalRotation;
-    private Vector3 _originalPos;
+    float _rotateSpeed = 5f, _powerMin = 5f, _powerMax = 500f, _chargeTime = 5f, _chargeTimeCurr = 0f;
+    bool _hardMode = true, _isCharging = false, _spaceUp = true, _fired = false;
+    Quaternion _originalRotation;
+    Vector3 _originalPos;
+    #endregion
 
-    // Start is called before the first frame update
+    #region public variables
+    public GameObject _directionalIndicator;
+    #endregion
+
+    #region private functions
     void Start()
     {
         _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
@@ -29,9 +26,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("GameController could not be found.");
         }
-
-        goal = GameObject.FindWithTag("Goal");
-        if(goal == null)
+        _goal = GameObject.FindWithTag("Goal");
+        if(_goal == null)
         {
             Debug.Log("The goal for this course could not be found.");
         }
@@ -43,31 +39,29 @@ public class PlayerController : MonoBehaviour
         _originalPos = transform.position; //saves start inital position (ball location) for resetting
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!_fired) //can only rotate if ball is not moving (not being fired)
         {
-            transform.Rotate(-Input.GetAxis("Vertical") * rotateSpeed, Input.GetAxis("Horizontal") * rotateSpeed, 0.0f);
+            transform.Rotate(-Input.GetAxis("Vertical") * _rotateSpeed, Input.GetAxis("Horizontal") * _rotateSpeed, 0.0f);
             //rotates the ball up/down, left/right on its axis
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && _spaceUp && _fired == false)
         {
-            if(!hardMode) //if hard mode is not enabled then ball will reset to previous (not initial) position when OutOfBounds is hit
+            if(!_hardMode) //if hard mode is not enabled then ball will reset to previous (not initial) position when OutOfBounds is hit
             {
                 _originalPos = transform.position;
             }
             _chargeTimeCurr = 0f; //the longer space is pressed = more power
             _isCharging = true;
             Debug.Log("Charge time: " + _chargeTimeCurr);
-            
         }
 
         if (_isCharging && Input.GetKeyUp(KeyCode.Space) && _fired == false)
         {
             _spaceUp = true;
-            float power = Mathf.Lerp(powerMin, powerMax, _chargeTimeCurr / chargeTime);
+            float power = Mathf.Lerp(_powerMin, _powerMax, _chargeTimeCurr / _chargeTime);
             //interpolates between min power, max power over the max charge time
             Debug.Log("Power: " + power);
             _fired = true;
@@ -97,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject == goal.gameObject)
+        if(collision.gameObject == _goal.gameObject)
         {
             _gameController.GoalReached();
         }
@@ -125,4 +119,5 @@ public class PlayerController : MonoBehaviour
         r.AddForce(r.transform.forward * power, ForceMode.Impulse); //adds force (using power value) in the direction the ball is 'facing'
         _gameController.IncrementStrokeCount();
     }
+    #endregion
 }
