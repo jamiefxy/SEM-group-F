@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
+
         if (Input.GetKeyDown(KeyCode.Space) && _spaceUp && _fired == false)
         {
             if(!hardMode) //if hard mode is not enabled then ball will reset to previous (not initial) position when OutOfBounds is hit
@@ -87,8 +88,8 @@ public class PlayerController : MonoBehaviour
             float power = Mathf.Lerp(powerMin, powerMax, _chargeTimeCurr / chargeTime);
             //interpolates between min power, max power over the max charge time
             Debug.Log("Power: " + power);
-            _directionalIndicator.GetComponent<Renderer>().enabled = false;
             _fired = true;
+            _directionalIndicator.GetComponent<Renderer>().enabled = false;
             HitBall(power);
         }
 
@@ -104,10 +105,12 @@ public class PlayerController : MonoBehaviour
 
         _travel = Mathf.Abs(_currHeight - _prevHeight); //magnitude does not detect falling so this is done manually
 
-        if(_travel == 0 && movementSpeed == 0) //check the ball is not moving, can then reset
+        if(_travel == 0 && movementSpeed == 0 && _fired && _spaceUp) //check the ball is not moving, can then reset
         {
             _fired = false;
             Debug.Log("!!!! STOPPED MOVING !!!!!!");
+            _horizontalAxis = 0;
+            _verticalAxis = 0; //set these back to 0 to stop flickering back to prev rotation
             transform.rotation = _originalRotation; //resets rotation
             _directionalIndicator.GetComponent<Renderer>().enabled = true;
         }
