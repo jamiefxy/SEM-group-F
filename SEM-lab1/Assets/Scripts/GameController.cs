@@ -7,10 +7,9 @@ public class GameController : MonoBehaviour
 {
     #region private variables
     public Text Score;
-    float _score = 0.0f, _timer = 5.0f;
+    float _score = 0.0f, _timer = 20.0f;
     int _strokeCount = 0;
     string[] _levels;
-    int _currentLevel = 0;
     #endregion
 
     #region private functions
@@ -18,6 +17,7 @@ public class GameController : MonoBehaviour
     {
         Score.text = $"Score: {_score}\nTimer: {_timer}\nStroke: {_strokeCount}";
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+        Debug.Log($"Scene Count: {sceneCount}");
         _levels = new string[sceneCount];
         for(int i = 0; i < sceneCount; i++)
         {
@@ -31,22 +31,11 @@ public class GameController : MonoBehaviour
         Score.text = $"Score: {_score}\nTimer: {(int)_timer}\nStroke: {_strokeCount}";
     }
 
-    // Reset the stroke count to 0
-    void ResetStrokeCount()
-    {
-        _strokeCount = 0;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        _score += 1;
-        _timer = 6.0f;
-    }
-
     void EndGame()
     {
-        _score = 0;
-        _timer = 0.0f;
+        GameStats.CurrentLevel = 0;
+        GameStats.Score = 0;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(GameStats.CurrentLevel);
     }
     #endregion
 
@@ -61,6 +50,17 @@ public class GameController : MonoBehaviour
     {
         // Log current score and start the next level
         // If the final level is completed, call End()
+
+        GameStats.Score += _score;
+        GameStats.Stroke += _strokeCount;
+        if(GameStats.CurrentLevel >= UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 1)
+        {
+            EndGame();
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(++GameStats.CurrentLevel);
+        }
     }
     #endregion
 }
