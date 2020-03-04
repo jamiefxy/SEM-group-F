@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
     GameObject _goal;
     GameController _gameController;
     float _rotateSpeed = 200.0f, _powerMin = 5f, _powerMax = 500f, _chargeTime = 5f, _chargeTimeCurr = 0f, _currHeight = 0f, _prevHeight = 0f, _travel = 0f,
-        _horizontalAxis = 0f, _verticalAxis = 0;
+        _horizontalAxis = 0f, _verticalAxis = 0, _barDisplay = 0f;
     bool _hardMode = true, _isCharging = false, _spaceUp = true, _fired = false;
     Quaternion _originalRotation, _userRotation;
     Vector3 _originalPos;
+    Vector2 _pos = new Vector2(20, 40), _size = new Vector2(60, 20);
+    Texture2D _emptyTex = null, _fullTex = null;
     #endregion
 
     #region public variables
@@ -80,12 +82,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Power: " + power);
             _fired = true;
             _directionalIndicator.GetComponent<Renderer>().enabled = false;
+            _barDisplay = 0; //resets power bar once fired
+            _isCharging = false;
             HitBall(power);
         }
 
         if (_isCharging)
         {
             _chargeTimeCurr += Time.deltaTime; //increases charge over time, when space is pressed
+            _barDisplay += Time.deltaTime; //power bar changes proportional to charge time
         }
 
         Rigidbody r = GetComponent<Rigidbody>();
@@ -111,6 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
     }
 
     void OnTriggerEnter(Collider collision)
@@ -142,6 +148,19 @@ public class PlayerController : MonoBehaviour
         Rigidbody r = GetComponent<Rigidbody>();
         r.AddForce(r.transform.forward * power, ForceMode.Impulse); //adds force (using power value) in the direction the ball is 'facing'
         _gameController.IncrementStrokeCount();
+    }
+
+    void OnGUI() //draws the power bar
+    {
+        GUI.BeginGroup(new Rect(_pos.x, _pos.y, _size.x, _size.y));
+
+        GUI.Box(new Rect(0, 0, _size.x, _size.y), _emptyTex);
+        GUI.BeginGroup(new Rect(0, 0, _size.x * _barDisplay, _size.y));
+
+        GUI.Box(new Rect(0, 0, _size.x, _size.y), _fullTex);
+
+        GUI.EndGroup(); //must pop both boxes
+        GUI.EndGroup();
     }
     #endregion
 }
