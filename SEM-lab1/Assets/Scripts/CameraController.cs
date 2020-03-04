@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     GameObject _player;
     Vector3 _offset;
-    float _smoothSpeed = 0.125f;
+    float _smoothSpeed = 0.025f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
         {
             Debug.Log("Player not Found.");
         }
-        _offset = transform.position;
+        _offset = new Vector3(0.0f,10.0f,-12.0f);
     }
 
     void LateUpdate()
