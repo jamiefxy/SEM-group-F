@@ -9,14 +9,19 @@ public class GameController : MonoBehaviour
     float _score = 0.0f, _timer = 5.0f;
     int _strokeCount = 0;
     bool playing = false;
+    PlayerController playerController;
     #endregion
 
     #region public variables
     public Text Score;
+    public Text Info;
     public GameObject menu;
+    public GameObject Helpmenu;
+    public GameObject Startmenu;
     public GameObject directionalIndicator;
     public Button start;
     public Button help;
+    public Button back;
     #endregion
 
     #region private functions
@@ -25,9 +30,10 @@ public class GameController : MonoBehaviour
         Score.text = $"Score: {_score}\nTimer: {_timer}\nStroke: {_strokeCount}";
 
         start.onClick.AddListener(StartGame);
-        help.onClick.AddListener(StartGame);
+        help.onClick.AddListener(Help);
+        back.onClick.AddListener(Back);
 
-        PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         Score.enabled = false;
         menu.SetActive(true);
@@ -61,10 +67,32 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        // Hide the Menu UI and re-enable the PlayerController script, the Directional Indicator and the Score text field
+        
+        Score.enabled = true; 
+        menu.SetActive(false); 
+        directionalIndicator.SetActive(true); 
+        playerController.enabled = true; 
 
+        // Hide the Menu UI and re-enable the PlayerController script, the Directional Indicator and the Score text field
     }
 
+    public void Help() 
+    {
+
+        Startmenu.SetActive(false);
+        Helpmenu.SetActive(true);
+        Info.enabled = true;   
+
+       // Info.text = $"\tInstructions\n\n Use the L and R Keys to aim for the Hole.\n Press down space and release to launch the golf ball.";   
+    }
+
+    public void Back() 
+    {
+        Startmenu.SetActive(true);
+        Helpmenu.SetActive(false);
+        Info.enabled = false; 
+    }
+    
     // Increase stroke count by 1
     public void IncrementStrokeCount()
     {
