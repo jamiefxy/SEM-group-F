@@ -69,9 +69,9 @@ public class GameController : MonoBehaviour
 
     #region public functions
 
-    public void StartGame()
+    void StartGame()
     {
-        
+        Debug.Log("Start pressed");
         Score.enabled = true; 
         menu.SetActive(false); 
         directionalIndicator.SetActive(true); 
