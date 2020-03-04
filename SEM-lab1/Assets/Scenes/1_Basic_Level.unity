@@ -352,8 +352,8 @@ RectTransform:
   m_Children:
   - {fileID: 1486580705}
   - {fileID: 679706370}
-  - {fileID: 1193858041}
   - {fileID: 691588165}
+  - {fileID: 1193858041}
   m_Father: {fileID: 1169944389}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -712,7 +712,7 @@ RectTransform:
   - {fileID: 1904118070}
   - {fileID: 834188020}
   m_Father: {fileID: 377339672}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1128,6 +1128,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: {fileID: 2089469589}
+  Info: {fileID: 1093799874}
+  menu: {fileID: 377339671}
+  Helpmenu: {fileID: 691588164}
+  Startmenu: {fileID: 1193858040}
+  directionalIndicator: {fileID: 940885782}
+  start: {fileID: 2086911739}
+  help: {fileID: 1625248122}
+  back: {fileID: 1904118071}
 --- !u!1 &1093799872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,7 +1419,7 @@ RectTransform:
   - {fileID: 1625248120}
   - {fileID: 1409881536}
   m_Father: {fileID: 377339672}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1522,7 +1530,7 @@ RectTransform:
   m_GameObject: {fileID: 1486580704}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000021251351}
-  m_LocalScale: {x: 12, y: 5, z: 1}
+  m_LocalScale: {x: 12, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 377339672}
   m_RootOrder: 0
@@ -1545,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1706,7 +1714,6 @@ GameObject:
   - component: {fileID: 1625248124}
   - component: {fileID: 1625248123}
   - component: {fileID: 1625248122}
-  - component: {fileID: 1625248121}
   m_Layer: 5
   m_Name: btnHelp
   m_TagString: Untagged
@@ -1734,18 +1741,6 @@ RectTransform:
   m_AnchoredPosition: {x: 94.60009, y: -100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1625248121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625248119}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03dea0f926c98354893b124ccca70b98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1625248122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,6 +2392,11 @@ PrefabInstance:
     - target: {fileID: 6688108664410483351, guid: 0e0e8ebb3a8c7934a90feb8e92486953,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688108664410483351, guid: 0e0e8ebb3a8c7934a90feb8e92486953,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
