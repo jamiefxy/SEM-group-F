@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6688108664410483345}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,10 +201,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3149ff3f2df330d43841f55424952e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outOfBoundsObject: {fileID: 0}
   _directionalIndicator: {fileID: 5505916933041835052}
-  rotateSpeed: 5
-  powerMin: 5
-  powerMax: 500
-  chargeTime: 5
-  hardMode: 1

@@ -29,7 +29,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Score.text = $"Stroke: {_strokeCount}";
-
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
         Debug.Log($"Scene Count: {sceneCount}");
         _levels = new string[sceneCount];
@@ -68,7 +67,6 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region public functions
-
     void StartGame()
     {
         Debug.Log("Start pressed");
