@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/1_Basic_Level.unity
+    guid: 6ef27169483fa6946aca1b2430a5e635
+  - enabled: 1
+    path: Assets/Scenes/2_Moving_Walls.unity
+    guid: 8f424e3866a86da429b77d4140e56263
+  - enabled: 1
+    path: Assets/Scenes/3_Hole_In_Wall.unity
+    guid: fb6e5dfa378c52943a3ad362b75a5544
+  - enabled: 1
+    path: Assets/Scenes/4_Gaps.unity
+    guid: 9f670db5f13e9b8468462051ed95911a
   m_configObjects: {}
