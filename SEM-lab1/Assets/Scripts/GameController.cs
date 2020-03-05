@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
     #region private functions
     void Start()
     {
-        Score.text = $"Stroke: {_strokeCount}";
+        Score.text = $"Strokes: {_strokeCount}";
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
         Debug.Log($"Scene Count: {sceneCount}");
         _levels = new string[sceneCount];
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
         if(playing)
         {
             _timer -= Time.deltaTime;
-            Score.text = $"Score: {_score}\nTimer: {(int)_timer}\nStroke: {_strokeCount}";
+        Score.text = $"Strokes: {_strokeCount}";
         }
     }
 
