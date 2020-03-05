@@ -51,11 +51,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if(playing)
-        {
-            _timer -= Time.deltaTime;
         Score.text = $"Strokes: {_strokeCount}";
-        }
     }
 
     void EndGame()
