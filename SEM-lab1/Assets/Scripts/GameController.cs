@@ -6,10 +6,23 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     #region private variables
-    public Text Score;
     float _score = 0.0f, _timer = 20.0f;
     int _strokeCount = 0;
     string[] _levels;
+    bool playing = false;
+    PlayerController playerController;
+    #endregion
+
+    #region public variables
+    public Text Score;
+    public Text Info;
+    public GameObject menu;
+    public GameObject Helpmenu;
+    public GameObject Startmenu;
+    public GameObject directionalIndicator;
+    public Button start;
+    public Button help;
+    public Button back;
     #endregion
 
     #region private functions
@@ -23,12 +36,26 @@ public class GameController : MonoBehaviour
         {
             _levels[i] = System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i));
         }
+
+        start.onClick.AddListener(StartGame);
+        help.onClick.AddListener(Help);
+        back.onClick.AddListener(Back);
+
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        Score.enabled = false;
+        menu.SetActive(true);
+        directionalIndicator.SetActive(false);
+        playerController.enabled = false;
     }
 
     void Update()
     {
-        _timer -= Time.deltaTime;
+        if(playing)
+        {
+            _timer -= Time.deltaTime;
         Score.text = $"Strokes: {_strokeCount}";
+        }
     }
 
     void EndGame()
@@ -40,6 +67,34 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region public functions
+    void StartGame()
+    {
+        Debug.Log("Start pressed");
+        Score.enabled = true; 
+        menu.SetActive(false); 
+        directionalIndicator.SetActive(true); 
+        playerController.enabled = true; 
+
+        // Hide the Menu UI and re-enable the PlayerController script, the Directional Indicator and the Score text field
+    }
+
+    public void Help() 
+    {
+
+        Startmenu.SetActive(false);
+        Helpmenu.SetActive(true);
+        Info.enabled = true;   
+
+       // Info.text = $"\tInstructions\n\n Use the L and R Keys to aim for the Hole.\n Press down space and release to launch the golf ball.";   
+    }
+
+    public void Back() 
+    {
+        Startmenu.SetActive(true);
+        Helpmenu.SetActive(false);
+        Info.enabled = false; 
+    }
+    
     // Increase stroke count by 1
     public void IncrementStrokeCount()
     {

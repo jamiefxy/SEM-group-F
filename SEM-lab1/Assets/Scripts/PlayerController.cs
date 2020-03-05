@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
             _horizontalAxis += Input.GetAxisRaw("Horizontal") * _rotateSpeed * Time.deltaTime;
             _verticalAxis += Input.GetAxisRaw("Vertical") * _rotateSpeed * Time.deltaTime;
+            _verticalAxis = _verticalAxis < 0 ? 0 : _verticalAxis > 180 ? 180 : _verticalAxis;
 
             _userRotation = Quaternion.Euler(-_verticalAxis, _horizontalAxis, 0);
             transform.rotation = _userRotation;

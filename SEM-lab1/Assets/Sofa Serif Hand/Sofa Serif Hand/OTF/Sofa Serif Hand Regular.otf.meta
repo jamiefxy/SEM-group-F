@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+guid: d1345bb836dcef94e90bca7338a7a99c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sofa Serif Hand
+  fontNames:
+  - Sofa Serif Hand
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c3942880f09d6d9429cb5d8c29756f8f, type: 3}
+  - {fileID: 12800000, guid: 7da588f0be0eaaa4bb55e799ba63b630, type: 3}
+  - {fileID: 12800000, guid: 727fd091fc9859145b556823ef7cb42c, type: 3}
+  - {fileID: 12800000, guid: 9131c1c1a09ea9541b6421708b58d49e, type: 3}
+  - {fileID: 12800000, guid: a155ccd3bf0589946971dc99cae09dda, type: 3}
+  - {fileID: 12800000, guid: 69924d368cf409443bda42d8da5cb89c, type: 3}
+  - {fileID: 12800000, guid: 05d2d0775511c6a49b29378333dcd989, type: 3}
+  - {fileID: 12800000, guid: 26444d773a0626b4f8e3f4942239ae92, type: 3}
+  - {fileID: 12800000, guid: 64a3454850cf1ff4c893f80a2a6835f2, type: 3}
+  - {fileID: 12800000, guid: 298edf58418036c43bb07b34818e7186, type: 3}
+  - {fileID: 12800000, guid: 06d512a8a80ccb04698e6bcf21422eb3, type: 3}
+  - {fileID: 12800000, guid: 1cbc85e8106b2314a8e6bdbd101d6510, type: 3}
+  - {fileID: 12800000, guid: b96bba69bfe13084cbb84ad6a51888af, type: 3}
+  - {fileID: 12800000, guid: 4675808b1320c6b4188a97b55998d1c6, type: 3}
+  - {fileID: 12800000, guid: 390d4cfbeb0c4e241a2d1ff1c789c791, type: 3}
+  - {fileID: 12800000, guid: a5803a2cc9ff08146a707164ca79b596, type: 3}
+  - {fileID: 12800000, guid: cc3bde2ce0694754f84ee3ba9a5cd328, type: 3}
+  - {fileID: 12800000, guid: 2fd8220ed79c99d49b3d6b78cc84c390, type: 3}
+  - {fileID: 12800000, guid: 81aae7bef6f240a42b886197dc2ecd6a, type: 3}
+  - {fileID: 12800000, guid: 77e28f2fb9b7cbc42929b38d9674e3b3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
